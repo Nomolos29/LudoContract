@@ -18,7 +18,7 @@ async function main() {
     const minValueA = ethers.parseUnits("2", 6);
     const minValueB = ethers.parseUnits("2", 18);
 
-
+    const liquidity = ethers.parseUnits("2", 18);
 
 
     const USDC_Contract = await ethers.getContractAt("IERC20", USDC, impersonatedSigner);
@@ -44,20 +44,21 @@ async function main() {
 
 
 
-    // const usdcAllowance = await USDC_Contract.allowance(impersonatedSigner.address, ROUTER_ADDRESS);
+    const usdcAllowance = await USDC_Contract.allowance(impersonatedSigner.address, ROUTER_ADDRESS);
 
 
-    // console.log("USDC allowance:", ethers.formatUnits(usdcAllowance, 6)); // Format using 6 decimals
+    console.log("USDC allowance:", ethers.formatUnits(usdcAllowance, 6)); // Format using 6 decimals
 
 
-    // const daiAllowance = await DAI_Contract.allowance(impersonatedSigner.address, ROUTER_ADDRESS);
+    const daiAllowance = await DAI_Contract.allowance(impersonatedSigner.address, ROUTER_ADDRESS);
 
-    // console.log("DAI allowance:", ethers.formatUnits(daiAllowance, 6)); // Format using 6 decimals
+    console.log("DAI allowance:", ethers.formatUnits(daiAllowance, 6)); // Format using 6 decimals
 
 
     await ROUTER.removeLiquidity(
       USDC, 
       DAI, 
+      liquidity,
       valueInUSDC, 
       valueInDAI, 
       minValueA, 
