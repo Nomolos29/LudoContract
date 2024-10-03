@@ -50,24 +50,24 @@ contract UseSwap {
   }
 
   function handleSwapExactTokensForETH(
+    uint amountIn,
     uint amountOutMin,
     address[] calldata path,
     address to,
-    uint deadline,
-    address TOKEN_ADDRESS
+    uint deadline
   ) external payable {
     // Approve the Uniswap router to spend the tokens
-    require(IERC20(TOKEN_ADDRESS).approve(uniswapRouter, msg.value), "approve failed.");
+    require(IERC20(path[0]).approve(uniswapRouter, msg.value), "approve failed.");
     require(amountOutMin > 0, "ETH amount must be greater than 0.");
     require(path.length >= 1, "Path must have at least 2 addresses.");
 
     
     IUniswapV2Router(uniswapRouter).swapExactTokensForETH(
-      uint amountIn,
-      uint amountOutMin,
-      address[] calldata path,
-      address to,
-      uint deadline
+      amountIn,
+      amountOutMin,
+      path,
+      to,
+      deadline
     );
 
     swapCount += 1;

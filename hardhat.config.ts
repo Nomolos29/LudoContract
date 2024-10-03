@@ -13,6 +13,11 @@ const config: HardhatUserConfig = {
       }
     },
 
+    'lisk-sepolia': {
+      url: `${process.env.LISK_API_KEY}`,
+      accounts: [process.env.WALLET_KEY as string],
+      gasPrice: 1000000000,
+    },
   },
 
 };
